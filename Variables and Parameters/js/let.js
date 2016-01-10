@@ -3,6 +3,7 @@ var chai = require('chai');
 var expect = chai.expect;
 
 describe("how let works", function(){
+	"use strict";
 	
 	it("will provide block scoping, unlike var (var)", function(){
 		

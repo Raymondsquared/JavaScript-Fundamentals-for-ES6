@@ -5,7 +5,7 @@ module.exports =
 	context: path.resolve('js'),
 	entry: 	
 	[
-		"./letandconst"
+		"./app"
 	],
 	output:
 	{
