@@ -54,49 +54,11 @@
 	'use strict';
 
 	//require('./let');
-	__webpack_require__(2);
+	//require('./const');
+	__webpack_require__(47);
 
 /***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var chai = __webpack_require__(3);
-
-	var expect = chai.expect;
-
-	describe("using const", function () {
-		"use strict";
-
-		it("will make a variable read only", function () {
-
-			var MAX_SIZE = 10;
-
-			//MAX_SIZE = 12;
-
-			expect(MAX_SIZE).to.equal(10);
-		});
-
-		it("can shadow outer declaration", function () {
-
-			var x = 12;
-
-			var doWork = function doWork() {
-
-				var x = 10;
-				return x;
-			};
-
-			var result = doWork();
-
-			expect(result).to.equal(10);
-
-			expect(x).to.equal(12);
-		});
-	});
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -9707,6 +9669,86 @@
 	  ('isNotFrozen', 'notFrozen');
 	};
 
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var chai = __webpack_require__(3);
+
+	var expect = chai.expect;
+
+	describe("destructuring", function () {
+		"use strict";
+
+		it("can destructure arrays", function () {
+
+			var doWork = function doWork() {
+				return [1, 3, 2];
+			};
+
+			var _doWork = doWork();
+
+			var _doWork2 = _slicedToArray(_doWork, 4);
+
+			var x = _doWork2[1];
+			var y = _doWork2[2];
+			var z = _doWork2[3];
+
+			expect(x).to.equal(3);
+			expect(y).to.equal(2);
+			expect(z).to.be.undefined;
+		});
+
+		it("can destructure objects", function () {
+
+			var doWork = function doWork() {
+				return {
+					firstName: 'Raymond',
+					lastName: 'Boles',
+					handles: {
+						twitter: '@rr',
+						facebook: 'rr'
+					}
+				};
+			};
+
+			var _doWork3 = doWork();
+
+			var first = _doWork3.firstName;
+			var lastName = _doWork3.lastName;
+			var _doWork3$handles = _doWork3.handles;
+			var twitter = _doWork3$handles.twitter;
+			var facebook = _doWork3$handles.facebook;
+
+			expect(first).to.equal('Raymond');
+			expect(lastName).to.equal('Boles');
+			expect(twitter).to.equal('@rr');
+			expect(facebook).to.equal('rr');
+		});
+
+		it("works with parameters", function () {
+
+			var doWork = function doWork(url, _ref) {
+				var data = _ref.data;
+				var cache = _ref.cache;
+				var headers = _ref.headers;
+
+				return data;
+			};
+
+			var result = doWork("api/test", {
+				data: "test",
+				cache: false
+			});
+
+			expect(result).to.equal("test");
+		});
+	});
 
 /***/ }
 /******/ ]);
