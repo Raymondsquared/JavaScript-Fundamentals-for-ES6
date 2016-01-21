@@ -1,3 +1,4 @@
 //require('./let');
 //require('./const');
-require('./destructuring');
+//require('./destructuring');
+require('./default');
