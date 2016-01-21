@@ -1,0 +1,34 @@
+var chai = require('chai');
+
+var expect = chai.expect;
+
+describe("the spread", function(){
+	"use strict";
+	
+	it("can spread an array accross parameters", function(){
+		
+		let doWork = function(x, y, z)
+		{
+			return x + y + z;
+		}
+
+		let result = doWork(...[1, 2, 3])
+
+		expect(result).to.equal(6);
+		
+	});
+
+
+	it("can build arrays", function(){
+		
+		var a = [4, 5, 6];
+		var b = [1, 2 ,3, ...a, 7, 8, 9];
+
+		expect(a).to.eql([4, 5, 6]);
+		expect(b).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+		
+	});
+
+
+
+});

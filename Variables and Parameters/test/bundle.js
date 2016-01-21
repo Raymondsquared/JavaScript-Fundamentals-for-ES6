@@ -57,10 +57,44 @@
 	//require('./const');
 	//require('./destructuring');
 	//require('./default');
-	__webpack_require__(47);
+	//require('./rest');
+	__webpack_require__(2);
 
 /***/ },
-/* 2 */,
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var chai = __webpack_require__(3);
+
+	var expect = chai.expect;
+
+	describe("the spread", function () {
+		"use strict";
+
+		it("can spread an array accross parameters", function () {
+
+			var doWork = function doWork(x, y, z) {
+				return x + y + z;
+			};
+
+			var result = doWork.apply(undefined, [1, 2, 3]);
+
+			expect(result).to.equal(6);
+		});
+
+		it("can build arrays", function () {
+
+			var a = [4, 5, 6];
+			var b = [1, 2, 3].concat(a, [7, 8, 9]);
+
+			expect(a).to.eql([4, 5, 6]);
+			expect(b).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+		});
+	});
+
+/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -9671,43 +9705,6 @@
 	  ('isNotFrozen', 'notFrozen');
 	};
 
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var chai = __webpack_require__(3);
-
-	var expect = chai.expect;
-
-	describe("rest parameters", function () {
-		"use strict";
-
-		it("is like varags", function () {
-
-			var doWork = function doWork(name) {
-				var result = 0;
-
-				for (var _len = arguments.length, numbers = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-					numbers[_key - 1] = arguments[_key];
-				}
-
-				numbers.forEach(function (n) {
-					result += n;
-				});
-
-				return result;
-			};
-
-			var result = doWork("Raymond", 1, 2, 3);
-			var result2 = doWork("Raymond");
-
-			expect(result).to.equal(6);
-			expect(result2).to.equal(0);
-		});
-	});
 
 /***/ }
 /******/ ]);

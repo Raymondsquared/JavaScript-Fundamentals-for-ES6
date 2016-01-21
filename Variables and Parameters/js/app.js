@@ -2,4 +2,5 @@
 //require('./const');
 //require('./destructuring');
 //require('./default');
-require('./rest');
+//require('./rest');
+require('./spread');
