@@ -58,6 +58,7 @@
 	//require('./destructuring');
 	//require('./default');
 	//require('./rest');
+	//require('./spread');
 	__webpack_require__(2);
 
 /***/ },
@@ -66,31 +67,58 @@
 
 	"use strict";
 
+	var _templateObject = _taggedTemplateLiteral(["", " + ", " is ", ""], ["", " + ", " is ", ""]);
+
+	function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 	var chai = __webpack_require__(3);
 
 	var expect = chai.expect;
 
-	describe("the spread", function () {
+	describe("template literals", function () {
 		"use strict";
 
-		it("can spread an array accross parameters", function () {
+		it("can easily combine literals and data", function () {
 
-			var doWork = function doWork(x, y, z) {
-				return x + y + z;
+			var doWork = function doWork(name) {
+				return "Hello, " + name;
 			};
 
-			var result = doWork.apply(undefined, [1, 2, 3]);
-
-			expect(result).to.equal(6);
+			var result = doWork("Raymond");
+			expect(result).to.equal("Hello, Raymond");
 		});
 
-		it("can build arrays", function () {
+		it("can help build URLs", function () {
 
-			var a = [4, 5, 6];
-			var b = [1, 2, 3].concat(a, [7, 8, 9]);
+			var category = "music";
+			var id = 2112;
 
-			expect(a).to.eql([4, 5, 6]);
-			expect(b).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+			var url = "http://apiservicer/" + category + "/" + id;
+
+			expect(url).to.equal("http://apiservicer/music/2112");
+		});
+
+		it("can use tags", function () {
+
+			var upper = function upper(strings) {
+				var result = "";
+
+				for (var i = 0; i < strings.length; i++) {
+					result += strings[i];
+
+					if (i < arguments.length - 1) {
+						result += arguments.length <= i + 1 ? undefined : arguments[i + 1];
+					}
+				}
+
+				return result.toUpperCase();
+			};
+
+			var x = 1;
+			var y = 3;
+			var result = upper(_templateObject, x, y, x + y);
+
+			expect(result).to.equal("1 + 3 IS 4");
 		});
 	});
 
