@@ -54,6 +54,7 @@
 	'use strict';
 
 	//require('./classes');
+	//require('./constructor');
 	__webpack_require__(2);
 
 /***/ },
@@ -78,13 +79,16 @@
 				function Employee(name) {
 					_classCallCheck(this, Employee);
 
-					this._name = name;
+					this.name = name;
 				}
 
 				_createClass(Employee, [{
-					key: "getName",
-					value: function getName() {
-						return this._name;
+					key: "name",
+					get: function get() {
+						return this._name.toUpperCase();
+					},
+					set: function set(newValue) {
+						this._name = newValue;
 					}
 				}]);
 
@@ -94,8 +98,11 @@
 			var e1 = new Employee("Raymond");
 			var e2 = new Employee("Boles");
 
-			expect(e1.getName()).to.equal("Raymond");
-			expect(e2.getName()).to.equal("Boles");
+			expect(e1.name).to.equal("RAYMOND");
+			expect(e2.name).to.equal("BOLES");
+
+			e1.name = "Kevin";
+			expect(e1.name).to.equal("KEVIN");
 		});
 	});
 
