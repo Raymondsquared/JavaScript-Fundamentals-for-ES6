@@ -1,3 +1,4 @@
 //require('./classes');
 //require('./constructor');
-require('./getandset');
+//require('./getandset');
+require('./inheritance');

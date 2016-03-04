@@ -55,58 +55,11 @@
 
 	//require('./classes');
 	//require('./constructor');
-	__webpack_require__(2);
+	//require('./getandset');
+	__webpack_require__(47);
 
 /***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var chai = __webpack_require__(3);
-
-	var expect = chai.expect;
-
-	describe("the class keyword", function () {
-		"use strict";
-
-		it("can have a constructor", function () {
-			var Employee = function () {
-				function Employee(name) {
-					_classCallCheck(this, Employee);
-
-					this.name = name;
-				}
-
-				_createClass(Employee, [{
-					key: "name",
-					get: function get() {
-						return this._name.toUpperCase();
-					},
-					set: function set(newValue) {
-						this._name = newValue;
-					}
-				}]);
-
-				return Employee;
-			}();
-
-			var e1 = new Employee("Raymond");
-			var e2 = new Employee("Boles");
-
-			expect(e1.name).to.equal("RAYMOND");
-			expect(e2.name).to.equal("BOLES");
-
-			e1.name = "Kevin";
-			expect(e1.name).to.equal("KEVIN");
-		});
-	});
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -9717,6 +9670,76 @@
 	  ('isNotFrozen', 'notFrozen');
 	};
 
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chai = __webpack_require__(3);
+
+	var expect = chai.expect;
+
+	describe("the class keyword", function () {
+		"use strict";
+
+		it("can have a constructor", function () {
+			var Person = function () {
+				function Person(name) {
+					_classCallCheck(this, Person);
+
+					this.name = name;
+				}
+
+				_createClass(Person, [{
+					key: "name",
+					get: function get() {
+						return this._name;
+					},
+					set: function set(newValue) {
+						this._name = newValue;
+					}
+				}]);
+
+				return Person;
+			}();
+
+			var Employee = function (_Person) {
+				_inherits(Employee, _Person);
+
+				function Employee() {
+					_classCallCheck(this, Employee);
+
+					return _possibleConstructorReturn(this, Object.getPrototypeOf(Employee).apply(this, arguments));
+				}
+
+				_createClass(Employee, [{
+					key: "doWork",
+					value: function doWork() {
+						return this._name + " is working";
+					}
+				}]);
+
+				return Employee;
+			}(Person);
+
+			var e1 = new Person("Raymond");
+			var e2 = new Employee("Boles");
+
+			expect(e1.name).to.equal("Raymond");
+			expect(e2.name).to.equal("Boles");
+			expect(e2.doWork()).to.equal("Boles is working");
+		});
+	});
 
 /***/ }
 /******/ ]);
