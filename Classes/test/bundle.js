@@ -53,12 +53,6 @@
 
 	'use strict';
 
-	//require('./let');
-	//require('./const');
-	//require('./destructuring');
-	//require('./default');
-	//require('./rest');
-	//require('./spread');
 	__webpack_require__(2);
 
 /***/ },
@@ -67,61 +61,43 @@
 
 	"use strict";
 
-	var _templateObject = _taggedTemplateLiteral(["", " + ", " is ", ""], ["", " + ", " is ", ""]);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var chai = __webpack_require__(3);
 
 	var expect = chai.expect;
 
-	describe("template literals", function () {
+	describe("the class keyword", function () {
 		"use strict";
 
-		it("can easily combine literals and data", function () {
-
-			var doWork = function doWork(name) {
-				return "Hello, " + name;
-			};
-
-			var result = doWork("Raymond");
-			expect(result).to.equal("Hello, Raymond");
-		});
-
-		it("can help build URLs", function () {
-
-			var category = "music";
-			var id = 2112;
-
-			var url = "http://apiservicer/" + category + "/" + id;
-
-			expect(url).to.equal("http://apiservicer/music/2112");
-		});
-
-		it("can use tags", function () {
-
-			var upper = function upper(strings) {
-				var result = "";
-
-				for (var i = 0; i < strings.length; i++) {
-					result += strings[i];
-
-					if (i < arguments.length - 1) {
-						result += arguments.length <= i + 1 ? undefined : arguments[i + 1];
-					}
+		it("can create a class", function () {
+			var Employee = function () {
+				function Employee() {
+					_classCallCheck(this, Employee);
 				}
 
-				return result.toUpperCase();
-			};
+				_createClass(Employee, [{
+					key: "doWork",
+					value: function doWork() {
+						return "complete!";
+					}
+				}, {
+					key: "getName",
+					value: function getName() {
+						return "Raymond";
+					}
+				}]);
 
-			var x = 1;
-			var y = 3;
-			var result = upper(_templateObject, x, y, x + y);
+				return Employee;
+			}();
 
-			//strings = ["", " + ", " is ", ""]
-			//values = [1, 3, 4]
+			var e = new Employee();
 
-			expect(result).to.equal("1 + 3 IS 4");
+			expect(e.doWork()).to.equal("complete!");
+			expect(e.getName()).to.equal("Raymond");
+			//expect(Employee.prototype.doWork().call(e)).to.equal("complete!");
 		});
 	});
 
