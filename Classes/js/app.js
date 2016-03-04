@@ -1,1 +1,2 @@
-require('./classes');
+//require('./classes');
+require('./constructor');

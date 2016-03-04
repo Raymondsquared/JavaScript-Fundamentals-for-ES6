@@ -53,6 +53,7 @@
 
 	'use strict';
 
+	//require('./classes');
 	__webpack_require__(2);
 
 /***/ },
@@ -72,32 +73,29 @@
 	describe("the class keyword", function () {
 		"use strict";
 
-		it("can create a class", function () {
+		it("can have a constructor", function () {
 			var Employee = function () {
-				function Employee() {
+				function Employee(name) {
 					_classCallCheck(this, Employee);
+
+					this._name = name;
 				}
 
 				_createClass(Employee, [{
-					key: "doWork",
-					value: function doWork() {
-						return "complete!";
-					}
-				}, {
 					key: "getName",
 					value: function getName() {
-						return "Raymond";
+						return this._name;
 					}
 				}]);
 
 				return Employee;
 			}();
 
-			var e = new Employee();
+			var e1 = new Employee("Raymond");
+			var e2 = new Employee("Boles");
 
-			expect(e.doWork()).to.equal("complete!");
-			expect(e.getName()).to.equal("Raymond");
-			//expect(Employee.prototype.doWork().call(e)).to.equal("complete!");
+			expect(e1.getName()).to.equal("Raymond");
+			expect(e2.getName()).to.equal("Boles");
 		});
 	});
 
