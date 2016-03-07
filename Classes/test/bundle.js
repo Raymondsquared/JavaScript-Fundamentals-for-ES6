@@ -56,6 +56,7 @@
 	//require('./classes');
 	//require('./constructor');
 	//require('./getandset');
+	//require('./inheritance');
 	__webpack_require__(47);
 
 /***/ },
@@ -9692,7 +9693,7 @@
 	describe("the class keyword", function () {
 		"use strict";
 
-		it("can have a constructor", function () {
+		it("can invoke super methods", function () {
 			var Person = function () {
 				function Person(name) {
 					_classCallCheck(this, Person);
@@ -9716,10 +9717,13 @@
 			var Employee = function (_Person) {
 				_inherits(Employee, _Person);
 
-				function Employee() {
+				function Employee(title, name) {
 					_classCallCheck(this, Employee);
 
-					return _possibleConstructorReturn(this, Object.getPrototypeOf(Employee).apply(this, arguments));
+					var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Employee).call(this, name));
+
+					_this._title = title;
+					return _this;
 				}
 
 				_createClass(Employee, [{
@@ -9727,17 +9731,20 @@
 					value: function doWork() {
 						return this._name + " is working";
 					}
+				}, {
+					key: "title",
+					get: function get() {
+						return this._title;
+					}
 				}]);
 
 				return Employee;
 			}(Person);
 
-			var e1 = new Person("Raymond");
-			var e2 = new Employee("Boles");
+			var e1 = new Employee("Developer", "Raymond");
 
 			expect(e1.name).to.equal("Raymond");
-			expect(e2.name).to.equal("Boles");
-			expect(e2.doWork()).to.equal("Boles is working");
+			expect(e1.title).to.equal("Developer");
 		});
 	});
 
