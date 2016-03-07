@@ -57,7 +57,8 @@
 	//require('./constructor');
 	//require('./getandset');
 	//require('./inheritance');
-	__webpack_require__(47);
+	//require('./super');
+	__webpack_require__(48);
 
 /***/ },
 /* 2 */,
@@ -9673,7 +9674,8 @@
 
 
 /***/ },
-/* 47 */
+/* 47 */,
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -9693,7 +9695,7 @@
 	describe("the class keyword", function () {
 		"use strict";
 
-		it("can invoke super methods", function () {
+		it("can override methods", function () {
 			var Person = function () {
 				function Person(name) {
 					_classCallCheck(this, Person);
@@ -9702,6 +9704,16 @@
 				}
 
 				_createClass(Person, [{
+					key: "doWork",
+					value: function doWork() {
+						return "free";
+					}
+				}, {
+					key: "toString",
+					value: function toString() {
+						return this.name;
+					}
+				}, {
 					key: "name",
 					get: function get() {
 						return this._name;
@@ -9729,7 +9741,7 @@
 				_createClass(Employee, [{
 					key: "doWork",
 					value: function doWork() {
-						return this._name + " is working";
+						return "paid";
 					}
 				}, {
 					key: "title",
@@ -9742,9 +9754,30 @@
 			}(Person);
 
 			var e1 = new Employee("Developer", "Raymond");
+			var p1 = new Person("Steven");
 
-			expect(e1.name).to.equal("Raymond");
-			expect(e1.title).to.equal("Developer");
+			expect(p1.doWork()).to.equal("free");
+			expect(e1.doWork()).to.equal("paid");
+			expect(e1.toString()).to.equal("Raymond");
+			expect(p1.toString()).to.equal("Steven");
+
+			var makeEveryoneWork = function makeEveryoneWork() {
+				var results = [];
+
+				for (var _len = arguments.length, people = Array(_len), _key = 0; _key < _len; _key++) {
+					people[_key] = arguments[_key];
+				}
+
+				for (var i = 0; i < people.length; i++) {
+					if (people[i] instanceof Person) {
+						results.push(people[i].doWork());
+					}
+				}
+
+				return results;
+			};
+
+			expect(makeEveryoneWork(p1, e1, {})).to.eql(["free", "paid"]);
 		});
 	});
 
